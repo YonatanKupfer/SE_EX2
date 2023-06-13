@@ -106,12 +106,16 @@ public class Contacts{
     
     //sort contacts by name
     public void sortByName() {
-        Collections.sort(Contacts.contactList);
+    	Collections.sort(Contacts.contactList, (a, b) -> a.getName().compareToIgnoreCase(b.getName()));
+    	System.out.println("The new list is:");
+    	displayContacts();
     }
 
     //sort contacts by phone number
     public void sortByNumber() {
-        Contacts.contactList.sort((a, b) -> a.getNumber().compareTo(b.getNumber()));
+    	Contacts.contactList.sort((a, b) -> b.getNumber().compareTo(a.getNumber()));
+    	System.out.println("The new list is:");
+    	displayContacts();
     }
 
     //remove duplicates

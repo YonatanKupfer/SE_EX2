@@ -1,23 +1,42 @@
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Phone {
-    public Phone(){
+public class TestPhone {
+    public TestPhone(){
 
     }
 
-    /**
-     * Manages the phone application by providing a menu-driven interface for accessing different apps.
-     */
-    public void phoneManager(){
+    public void phoneManager_test() throws CloneNotSupportedException{
         Contacts contacts = new Contacts();
         Sms sms = new Sms();
         Diary diary = new Diary();
         MediaPlayer mediaPlayer = new MediaPlayer();
         boolean[] apps = {true, true, true, true};
         boolean exit = false;
+        
+		contacts.addContact(new Contact("itay", "123"));
+		contacts.addContact(new Contact("noam", "456"));
+		contacts.addContact(new Contact("adina", "789"));
+		contacts.addContact(new Contact("dvir", "1011"));
+		contacts.addContact(new Contact("Dvir", "1011"));
+		
+		
+		sms.addMessage("itay", "message_1");		
+		sms.addMessage("itay","message_1");
+		
+		Date date_1 = new Date();
+		
+		diary.addEvent(new Meet("meet_1", date_1, 40, contacts.getContactByName("adina")));
+        diary.addEvent(new Single("single_1", date_1, 10, "description"));
 
+        
+        mediaPlayer.addMedia(new Music("Unicorn - Noa Kirel", "3:00"));
+        mediaPlayer.addMedia(new Music("It's been a long time you got here", "0:05"));
+        mediaPlayer.addMedia(new Video("Noams 'Bar-Mitzva'", "120:00"));
+
+        
         Scanner reader = new Scanner(System.in);
         String choice = "";
         String name = "";

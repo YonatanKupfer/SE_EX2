@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Iterator;
+import java.util.Calendar;
 
 
 public class Diary {
@@ -25,7 +26,10 @@ public class Diary {
         if(isOverlap(event)){
             return;
         }
-        int day = event.getDate().getDay();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(event.getDate());
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        System.out.println(day);
         this.daysOfDiary[day-1].add((Event) event.clone());
         Collections.sort(this.daysOfDiary[day-1]);
         System.out.println("Event added successfully");
@@ -62,8 +66,8 @@ public class Diary {
     // 4. Print all events of a contact by date order
     public void printEventsByContact(String name) {
         boolean flag = false;
-        for(int i = 0; i < 30; i++){
-            Iterator<Event> it = this.daysOfDiary[i].iterator();
+        for(LinkedList<Event> list : this.daysOfDiary){
+            Iterator<Event> it = list.iterator();
             while(it.hasNext()){
                 Event e = it.next();
                 if(e.compareContact(new Contact(name,"0"))){
@@ -121,7 +125,10 @@ public class Diary {
     }
 
     public boolean isOverlap(Event event){
-        Iterator<Event> it = this.daysOfDiary[event.getDate().getDay()-1].iterator();
+    	Calendar calendar = Calendar.getInstance();
+        calendar.setTime(event.getDate());
+        int day = calendar.get(Calendar.DAY_OF_MONTH); 
+        Iterator<Event> it = this.daysOfDiary[day-1].iterator();
         while(it.hasNext()){
             Event e = it.next();
             int choose = e.overlap(event);

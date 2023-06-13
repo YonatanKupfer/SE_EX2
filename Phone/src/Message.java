@@ -25,6 +25,6 @@ public class Message {
     }
 
     public void addText(String text) {
-        this.text = this.text + " " + text;
+        this.text = this.text + "\n" + text;
     }
 }
